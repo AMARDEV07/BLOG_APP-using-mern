@@ -1,19 +1,37 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Images from "./Images";
-import { SignedIn, SignedOut, UserButton } from "@clerk/clerk-react";
+import { SignedIn, SignedOut, useAuth, UserButton } from "@clerk/clerk-react";
+
 
 function Navbar() {
   const [openMenu, setopenMenu] = useState(false);
+  const {getToken}=useAuth();
+
+
+
+useEffect(()=>{
+  getToken().then(token=>console.log(token))
+},[])
+
+
+
 
   const HambrugerHandler = () => {
-    
     setopenMenu((prev) => !prev); //set prev value
   };
 
-  return (
 
+
+
+
+
+
+
+  return (
     <div className="w-full h-16 md:h-20 flex items-center justify-between">
+
+
       {/* LOGO  */}
       <Link to="/" className="flex items-center gap-4 text-2xl font-bold">
         {/* Create component for images to reuse across app */}
@@ -26,6 +44,8 @@ function Navbar() {
         />
         <span>AmanBlog</span>
       </Link>
+
+
 
       {/* MOBILE MENU */}
       <div className="md:hidden">

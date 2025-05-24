@@ -1,4 +1,4 @@
-import React from 'react'
+
 import { Link } from 'react-router-dom';
 import MainCategories from '../components/MainCategories';
 import FeaturedPost from '../components/FeaturedPost';
@@ -13,6 +13,8 @@ function HomePage() {
         <Link to="/" className="hover:text-blue-600 transition-colors"> Home</Link>
         <span>•</span>
         <span className='text-blue-800'>Blogs and Articles</span>
+        <Link to="/write" className="hover:text-blue-600 transition-colors">.write</Link>
+       
       </div>
 
       {/* INTRODUCTION */}
@@ -24,8 +26,9 @@ function HomePage() {
           <p className='mt-8 text-md md:text-xl text-gray-600'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo, odio!</p>
         </div>
 
-        {/* animation button  */}
 
+
+        {/* animation button  */}
         <Link to="/write" className=' hidden md:block relative'>
 
           <svg

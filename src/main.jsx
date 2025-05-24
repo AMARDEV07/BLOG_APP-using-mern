@@ -2,6 +2,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+// routes
 import HomePage from "./Routes/HomePage";
 import PostListPage from "./Routes/PostListPage";
 import SinglePostPage from "./Routes/SinglePostPage";
@@ -9,13 +10,19 @@ import MainLayout from "./Layouts/MainLayout";
 import WritePage from "./Routes/WritePage";
 import LoginPage from "./Routes/LoginPage";
 import RegisterPage from "./Routes/RegisterPage";
+//clerk for login log out sercure routes
 import { ClerkProvider } from "@clerk/clerk-react";
+//host tost for notfication
+import { Toaster } from "react-hot-toast";
+//react query..
+import {QueryClient,QueryClientProvider,} from '@tanstack/react-query'
+const queryClient = new QueryClient()
 
 
 
-// Import your Publishable Key
+
+// Import your  clerk Publishable Key
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
-
 if (!PUBLISHABLE_KEY) {
   throw new Error("Missing Publishable Key");
 }
@@ -33,10 +40,10 @@ const router = createBrowserRouter([
         element: <PostListPage />,
       },
       {
-        path: "/singlePost",
+        path: "/:slug",
         element: <SinglePostPage />,
       },
-     
+
       {
         path: "/write",
         element: <WritePage />,
@@ -49,22 +56,22 @@ const router = createBrowserRouter([
         path: "/register",
         element: <RegisterPage />,
       },
-      // Keep this as a fallback for any other slugs
-      {
-        path: "/:slug",
-        element: <HomePage />,
-      },
-     
       
+
     ],
   },
 ]);
 
 createRoot(document.getElementById("root")).render(
-  
+
   <StrictMode>
     <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
-      <RouterProvider router={router} />
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+        <Toaster position="top-center" />
+
+      </QueryClientProvider>
+
     </ClerkProvider>
   </StrictMode>
 );

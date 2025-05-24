@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import  { useState } from 'react'
 import RecentPostList from '../components/RecentPostList'
 import SideMenu from '../components/SideMenu'
 
-// all pst list page 
+// all post list page 
 
 function PostListPage() {
   const [open, setOpen] = useState(false)
